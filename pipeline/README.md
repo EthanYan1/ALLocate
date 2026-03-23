@@ -7,4 +7,4 @@
 3. **Stage 2** — detect cells, aggregate blast fraction  
 4. Slide-level report vs. thresholds (e.g. ≤5% / ≥20%)  
 
-Add CLI: `python -m pipeline.run --config configs/default.yaml` *(placeholder)*.
+Entry point: **`allocate_ai_pipeline.py`** *(stub)* — see root `README.md` § End-to-end pipeline.

@@ -41,7 +41,7 @@ ALLocate/
 ├── README.md                 ← you are here
 ├── region_classifier/      ← Stage 1: data prep, training, evaluation, inference
 ├── cell_detection/         ← Stage 2: data prep, training, evaluation, inference
-├── pipeline/               ← End-to-end scripts: tile → region → detect → report
+├── pipeline/               ← `allocate_ai_pipeline.py`: capture → region → detect → report
 ├── data/                   ← Data layout placeholders (no patient data in git)
 ├── notebooks/              ← Figure / plot reproduction for the paper
 ├── examples/               ← A small set of example images for documentation
@@ -149,38 +149,43 @@ After export, the dataset on disk usually matches this shape (names may be `vali
 
 - Entry point: **`cell_detection/eval.py`** *(stub — Ethan to implement; validation mAP / PR, etc.)*.
 
-### Inference *(placeholder)*
-
-- Input: regions from Stage 1; output: boxes, class labels, optional exports for blast quantification.
-- **TODO:** Batch vs. real-time inference, NMS settings, and slide-level blast aggregation in `pipeline/`.
 
 ---
 
 ## End-to-end pipeline
 
-**TODO:** Describe how captured images or WSI tiles flow through Stage 1 → region selection (e.g. top-*k* adequate regions) → Stage 2 → **slide-level** blast percentage and comparison to clinical thresholds (e.g. ≤5% vs. ≥20%). Implementation will live under `pipeline/` with example configs.
+The full system chains **(i)** image acquisition with the **AAMSS** hardware, **(ii)** Stage 1 region selection, and **(iii)** Stage 2 blast detection and slide-level quantification. Conceptually: motorized scan → a set of fields or tiles → CNN region scoring → YOLO on adequate regions → aggregate blast fraction and compare to clinical thresholds (e.g. ≤5% vs. ≥20%).
+
+**Documentation:** A short description of how the self-driving microscope acquires a representative set of images (scan path, magnification, number of fields) will live here or under `docs/` once finalized *(Ethan)*.
+
+**Implementation:** The integrated software entry point will be **`pipeline/allocate_ai_pipeline.py`** *(stub — to be implemented)*. It should orchestrate loading weights, running Stage 1 and Stage 2, and writing a concise report (counts, blast percentage, optional overlays). Configuration (paths to `data.yaml`, region weights, detection weights, input directory) should be passed via CLI flags or a YAML file under `pipeline/configs/`.
+
+```bash
+# Planned usage (exact interface TBD)
+python pipeline/allocate_ai_pipeline.py --config pipeline/configs/default.yaml
+```
 
 ---
 
 ## Hardware & stage control *(transparency)*
 
-The manuscript describes a **RAMPS 1.4 + Arduino Mega 2560** setup, **NEMA 14** motors, and **3D-printed** couplings for X/Y stage actuation.
-
-**Open item:** Final packaging for release — e.g. Arduino firmware, wiring diagram, mechanical BOM, and a short “control architecture” narrative may live under `hardware_firmware/` and `docs/`. *Decision pending.*
+Ethan to do: create a folder and move your C++ codes here for me to take a look. 
 
 ---
 
-## Model weights
+## Model weights & data release
 
-> **Release policy:** Whether **institutionally sensitive** fine-tuned weights can be distributed requires **Greg’s** input. Until then, this repo may ship a **public base architecture** or **sanitized checkpoint** under `weights/` with clear naming, e.g. `base/` vs. `allocate_full/` (placeholder).
+**Model checkpoints.** Public release of the trained ALLocate checkpoints—including hosting location, file naming, and licensing—is **not yet finalized** and remains subject to **institutional approval** and partner agreements. This repository may eventually include placeholder paths under `weights/` together with checksums and documentation once a release plan is confirmed.
 
-**TODO:** Add checksums, license line per checkpoint, and inference-only vs. trainable flags.
+**Research data.** We are **in active discussion with our academic institutions** regarding the sharing of de-identified imaging data and related materials. **Timing and scope** of any public release are expected to be **aligned with the manuscript** (for example, following peer review and acceptance), pending ethics, privacy, and data-use agreements. Until such terms are settled, **no patient-level or restricted datasets are distributed through this repository**.
+
+For updates, please refer to the **Data availability** section of the published manuscript and any supplementary materials, or contact the authors after acceptance.
 
 ---
 
 ## Examples
 
-**TODO (Ethan):** Add **five** representative images (e.g. region classes, detection overlays, or glass-slide crops) under `examples/` with short captions in `examples/README.md`. *No PHI; de-identified or synthetic only.*
+**TODO (Ethan):** Add **five** representative images (e.g. region classes, detection overlays, or glass-slide crops) under `examples/` with short captions in `examples/README.md`.
 
 ---
 
@@ -190,22 +195,14 @@ The manuscript describes a **RAMPS 1.4 + Arduino Mega 2560** setup, **NEMA 14** 
 
 Suggested stubs:
 
-- `notebooks/figures_region_classifier.ipynb`
-- `notebooks/figures_cell_detection.ipynb`
-- `notebooks/figures_slide_level.ipynb`
+- `notebooks/Figure2.ipynb`
+- `notebooks/Figure3.ipynb`
+- `notebooks/Figure4.ipynb`
+- `notebooks/Figure5.ipynb`
 
 ---
 
-## Project checklist *(internal)*
 
-- [ ] Draft README finalized *(this file — iterate)*  
-- [ ] Folder structure agreed; **Ethan** reorganizes code into layout above  
-- [ ] **Harry:** installation & dependency lockfiles  
-- [ ] **Ethan:** five example images + notebook index for plots  
-- [ ] **Greg:** decision on **official release** of sensitive model weights  
-- [ ] Hardware / Arduino / control-architecture documentation approach decided  
-
----
 
 ## Citation
 

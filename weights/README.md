@@ -1,10 +1,5 @@
-# Model weights *(skeleton)*
+# Model weights *(availability TBD)*
 
-| Path | Description | Release? |
-|------|-------------|----------|
-| `base/` | Placeholder for **public base** weights or architecture-only checkpoint | TBD |
-| `allocate/` | Full fine-tuned ALLocate weights | **Requires Greg’s approval** — may remain private |
+Release of trained checkpoints (including paths under `base/` and `allocate/`) is **pending** institutional and partner agreements. See the root **`README.md`** section **Model weights & data release** for the current policy.
 
-**TODO:** Add SHA256, file size, training config hash, and license text per file.
-
-**Note:** Until policy is set, use **base** only or document “download separately” for restricted checkpoints.
+When weights are released, this README should list **SHA256**, **file size**, **training config**, and **license** per file.
