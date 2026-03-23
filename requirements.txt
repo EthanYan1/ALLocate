@@ -1,1 +1,30 @@
-# TODO (Harry): Pin versions for training + inference (TensorFlow, ultralytics, albumentations, libvips, numpy, ...)
+# ALLocate — top-level dependencies only (pip installs the rest).
+# System: install OpenSlide before openslide-python where needed — https://openslide.org/download/
+
+# --- Models ---
+tensorflow>=2.12,<2.19
+ultralytics>=8.0,<9
+
+# PyTorch (Ultralytics). For CUDA builds, use https://pytorch.org/get-started/locally/
+# instead of the CPU wheels pip picks by default.
+torch>=2.0
+torchvision>=0.15
+
+# --- Arrays, vision, slides ---
+numpy>=1.23,<2
+opencv-python>=4.8
+Pillow>=10.0
+openslide-python>=1.3
+
+# --- Training / analysis / notebooks ---
+pandas>=2.0
+scikit-learn>=1.3
+matplotlib>=3.7
+seaborn>=0.13
+albumentations>=1.3
+tensorboard>=2.12
+jupyter>=1.0
+ipykernel>=6.0
+
+# --- Optional: microscope UI automation (notebooks/ALLocate_software.py) ---
+pyautogui>=0.9.54

@@ -1,9 +1,6 @@
-# Stage 2 — Cell detection (YOLOv8) *(skeleton)*
+# Stage 2 — Cell detection (YOLOv8)
 
-**Planned contents**
+- **`train.py`** / **`eval.py`** — stubs for Ethan; see root **`README.md`** for Roboflow → YOLO layout and `data.yaml`.
+- **`configs/`** — optional Ultralytics overrides (`*.yaml`) once added.
 
-- `configs/` — `data.yaml`, model size (s/m), train settings  
-- `train.py` / `val.py` / `predict.py` — Ultralytics wrappers *(TBD)*  
-- `exports/` — ONNX / TorchScript if needed for deployment  
-
-Classes: **blast**, **non-blast (normal marrow)**, **artifact** (training); evaluation metrics per paper (precision, recall, mAP50).
+Classes *(paper)*: blast vs. non-blast nucleated cells, plus **artifact** during training where used.

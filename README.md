@@ -39,8 +39,6 @@ flowchart LR
 ```
 ALLocate/
 ├── README.md                 ← you are here
-├── docs/                     ← extended methods: hardware control architecture (TBD)
-├── hardware_firmware/        ← Arduino / RAMPS firmware, wiring notes, BOM placeholders
 ├── region_classifier/      ← Stage 1: data prep, training, evaluation, inference
 ├── cell_detection/         ← Stage 2: data prep, training, evaluation, inference
 ├── pipeline/               ← End-to-end scripts: tile → region → detect → report
@@ -48,7 +46,6 @@ ALLocate/
 ├── notebooks/              ← Figure / plot reproduction for the paper
 ├── examples/               ← A small set of example images for documentation
 ├── weights/                ← Model checkpoints (release policy TBD)
-└── region_cnn/             ← legacy / in-progress modules (to be merged by Ethan)
 ```
 
 ---
@@ -64,60 +61,98 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Optional: `requirements-train.txt`, `requirements-inference.txt`, or a `environment.yml` — *to be decided.*
 
 ---
 
 ## Data & cohorts *(high level)*
 
-Training used de-identified whole-slide and tiled data from **UCSF**; external testing included **MSKCC** digitized slides and **glass-slide** evaluation via the self-driving microscope (**SDM**). **No restricted identifiers or raw clinical data should be committed to this repository.**
+Training used de-identified whole-slide and tiled data from **UCSF**; external testing included **MSKCC** digitized slides and **glass-slide** evaluation via the self-driving microscope (**SDM**). 
 
-| Split / name | Purpose *(paper)* | Notes for this repo |
-|--------------|-------------------|---------------------|
-| TR / ER | Region classifier train / eval | Placeholder manifests under `data/` |
-| TC / EC | Cell detector train / eval | Bounding-box format TBD in `cell_detection/` |
-| EVC / EVS | External tile- and slide-level validation | External institution |
-| SDM | Glass slides + AAMSS | Hardware + AI end-to-end |
+Purpose *(paper)* | Notes for this repo |
+|-------------------|---------------------|
+Region classifier train / eval | Placeholder manifests under `region_classifier/` |
+Cell detector train / eval | Bounding-box format TBD in `cell_classifer/`
 
-**TODO:** Add `data/README.md` with directory conventions, filename patterns, and ethics / access language approved by the team.
+**TODO:** Add `data/availbility_statement.md` with directory conventions, filename patterns, and ethics / access language approved by the team.
 
 ---
 
 ## Stage 1 — Region classifier (CNN)
 
-### Data collection *(placeholder)*
+### Data format
 
-- Source: 40× / 400×-equivalent WSI-derived tiles; classes include **adequate**, **blood**, **clot**.
-- **TODO:** Document tiling (e.g. libvips), label format, and train/val split policy.
+On-disk layout follows **ImageNet-style** image folders (class = subdirectory name):
 
-### Training *(placeholder)*
+```
+<dataset_root>/
+├── train/
+│   ├── adequate/
+│   │   ├── <image>.png
+│   │   └── ...
+│   ├── blood/
+│   └── clot/
+└── test/
+    ├── adequate/
+    ├── blood/
+    └── clot/
+```
+
+- Source tiles are 40× / 400×-equivalent WSI-derived patches; class names are **`adequate`**, **`blood`**, **`clot`**.
+- Use **`train/`** for training and **`test/`** for held-out evaluation (add **`val/`** if you use a separate validation split).
+
+### Training
 
 - Framework: TensorFlow *(per manuscript)*; augmentations via Albumentations.
-- **TODO:** Entry script, config files, and logging paths under `region_classifier/`.
+- Entry point: **`region_classifier/train.py`** *(stub — Ethan to implement)*.
 
-### Inference *(placeholder)*
+### Evaluation
 
-- Input: tiles or tiled WSI; output: class scores / masks / heatmaps for downstream region selection.
-- **TODO:** CLI or Python API under `region_classifier/` and wiring in `pipeline/`.
+- Entry point: **`region_classifier/eval.py`** *(stub — Ethan to implement)*.
+
 
 ---
 
 ## Stage 2 — Cell detection (YOLOv8)
 
-### Data collection *(placeholder)*
+### Data format (Roboflow → YOLO)
 
-- Annotated nucleated cells with bounding boxes; blast vs. non-blast (+ artifact class in training).
-- **TODO:** Roboflow or local export format, class IDs, and QC steps documented in `cell_detection/`.
+Labels for this project were collected in **[Roboflow](https://roboflow.com/)** (private workspace / project).
 
-### Training *(placeholder)*
+- **Project type:** **Object detection** — each instance is a **bounding box** (axis-aligned rectangle).  
+  Roboflow also supports **instance segmentation** (polygon / “press P” vertex tools); **that workflow is not what we used** for ALLocate’s cell detector—stick to **bounding-box** detection labels for blast vs. non-blast (+ **artifact** during training to suppress false positives).
+- **Typical Roboflow flow:** create a workspace → **Upload** images → assign / open **Unannotated** images → draw boxes per class → **Generate** a version (with any augmentations in Roboflow) → **Export** in **YOLOv8** format (YOLOv5-compatible layout is fine for Ultralytics).
 
-- Ultralytics YOLOv8; hyperparameter search summarized in supplementary tables in the paper.
-- **TODO:** Train script, `data.yaml`, and experiment tracking location.
+After export, the dataset on disk usually matches this shape (names may be `valid` vs `val` depending on export):
+
+```
+<dataset_root>/
+├── data.yaml              # train/val paths, nc, names
+├── train/
+│   ├── images/            # .jpg / .png
+│   └── labels/            # one .txt per image, YOLO format
+├── valid/                 # or val/
+│   ├── images/
+│   └── labels/
+└── test/                  # optional
+    ├── images/
+    └── labels/
+```
+
+**YOLO label files** (`.txt`): one line per box — `class_id x_center y_center width height` with coordinates **normalized** to `[0, 1]` relative to image width/height. **`data.yaml`** lists `train` / `val` (paths or relative dirs), `nc`, and `names` (class names in order of class id).
+
+### Training
+
+- **Ultralytics YOLOv8**; hyperparameter choices are summarized in the paper’s supplementary tables.
+- Entry point: **`cell_detection/train.py`** *(stub — Ethan to implement; typically wraps `yolo train` or the Ultralytics API with a path to `data.yaml`)*.
+
+### Evaluation
+
+- Entry point: **`cell_detection/eval.py`** *(stub — Ethan to implement; validation mAP / PR, etc.)*.
 
 ### Inference *(placeholder)*
 
-- Input: regions passed from Stage 1; output: boxes, class labels, optional export for quantification.
-- **TODO:** Batch vs. real-time inference, NMS settings, and blast fraction aggregation for slides.
+- Input: regions from Stage 1; output: boxes, class labels, optional exports for blast quantification.
+- **TODO:** Batch vs. real-time inference, NMS settings, and slide-level blast aggregation in `pipeline/`.
 
 ---
 
