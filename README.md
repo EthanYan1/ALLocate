@@ -3,7 +3,7 @@
 **An AI-powered self-driving microscope for low-cost acute leukemia detection**
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-TBD-lightgrey.svg)]()
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
 > ALLocate (**Acute Leukemia Locate**) couples a low-cost motorized microscope stage with a **two-stage** deep learning pipeline: a **CNN region classifier** (adequate vs. blood vs. clot) and a **YOLOv8** blast / non-blast detector. This repository will hold code, notebooks, hardware notes, and release artifacts for the accompanying manuscript.
 
@@ -185,6 +185,16 @@ If you use this software or models, please cite the ALLocate manuscript *(detail
   note    = {TODO: update with venue, volume, pages, DOI}
 }
 ```
+
+---
+
+## License
+
+This repository is licensed under **Creative Commons Attribution-NonCommercial 4.0 International** (**[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)**). See the [`LICENSE`](LICENSE) file for the full legal text.
+
+**Summary (not legal advice):** you may share and adapt the material **for non-commercial purposes** if you give **attribution** and point to this license. **Commercial use** is not permitted under this license without separate permission.
+
+**Other artifacts:** model weights, datasets, or third-party dependencies may be governed by **separate** terms; see `weights/README.md` and any per-component notices.
 
 ---
 
