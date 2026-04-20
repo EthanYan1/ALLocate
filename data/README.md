@@ -2,6 +2,8 @@
 
 **Do not commit** identifiable patient data or institution-internal paths.
 
+For sharing policy, cohorts, and what this repository does **not** distribute, read [**availability_statement.md**](availability_statement.md).
+
 Suggested layout:
 
 ```

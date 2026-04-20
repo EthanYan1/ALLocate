@@ -65,14 +65,14 @@ pip install -r requirements.txt
 
 ## Data & cohorts *(high level)*
 
-Training used de-identified whole-slide and tiled data from **UCSF**; external testing included **MSKCC** digitized slides and **glass-slide** evaluation via the self-driving microscope (**SDM**). 
+Training used de-identified whole-slide and tiled data from **UCSF**; external testing included **MSKCC** digitized slides and **glass-slide** evaluation via the self-driving microscope (**SDM**). The canonical **data availability statement** (including sharing, weights, and repository constraints) is in [`data/availability_statement.md`](data/availability_statement.md). The team is **actively working on the accompanying manuscript**; that document may be updated as publication and approvals progress.
 
-Purpose *(paper)* | Notes for this repo |
+| Purpose *(paper)* | Notes for this repo |
 |-------------------|---------------------|
-Region classifier train / eval | Placeholder manifests under `region_classifier/` |
-Cell detector train / eval | Bounding-box format TBD in `cell_classifer/`
+| Region classifier train / eval | Placeholder manifests under `region_classifier/` |
+| Cell detector train / eval | Bounding-box format TBD in `cell_detection/` |
 
-**TODO:** Add `data/availbility_statement.md` with directory conventions, filename patterns, and ethics / access language approved by the team.
+Directory conventions and local layout notes live under [`data/README.md`](data/README.md).
 
 ---
 
@@ -174,17 +174,13 @@ Ethan to do: create a folder and move your C++ codes here for me to take a look.
 
 ## Model weights & data release
 
-**Model checkpoints.** Public release of the trained ALLocate checkpoints—including hosting location, file naming, and licensing—is **not yet finalized** and remains subject to **institutional approval** and partner agreements. This repository may eventually include placeholder paths under `weights/` together with checksums and documentation once a release plan is confirmed.
-
-**Research data.** We are **in active discussion with our academic institutions** regarding the sharing of de-identified imaging data and related materials. **Timing and scope** of any public release are expected to be **aligned with the manuscript** (for example, following peer review and acceptance), pending ethics, privacy, and data-use agreements. Until such terms are settled, **no patient-level or restricted datasets are distributed through this repository**.
-
-For updates, please refer to the **Data availability** section of the published manuscript and any supplementary materials, or contact the authors after acceptance.
+Summary: checkpoints and research data releases are **not yet finalized** and depend on **institutional and partner approval**. See the full statement in [`data/availability_statement.md`](data/availability_statement.md). For publication-aligned detail, use the manuscript **Data availability** section when the paper is available.
 
 ---
 
 ## Examples
 
-**TODO (Ethan):** Add **five** representative images (e.g. region classes, detection overlays, or glass-slide crops) under `examples/` with short captions in `examples/README.md`.
+**TODO (Ethan):** Add **five** representative images (e.g. region classes, detection overlays, or glass-slide crops) under `examples/` with short captions in [`examples/README.md`](examples/README.md). Any examples must respect the constraints in [`data/availability_statement.md`](data/availability_statement.md).
 
 ---
 

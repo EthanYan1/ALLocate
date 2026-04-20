@@ -1,5 +1,9 @@
 # Example images *(skeleton)*
 
+**Data use.** This folder is for **small, de-identified illustrative images** only (e.g. documentation figures). It is **not** a dataset release. For what may be shared, institutional constraints, and how this relates to the manuscript, see the repository [**data availability statement**](../data/availability_statement.md).
+
+**Manuscript.** We are **currently working on the paper**; example content and captions may be refreshed as the manuscript and approvals evolve.
+
 **TODO (Ethan):** Add **five** de-identified images, for example:
 
 1. Low-mag smear context *(optional)*  
