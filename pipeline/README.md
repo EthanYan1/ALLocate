@@ -1,5 +1,4 @@
-# End-to-end pipeline *(skeleton)*
-
+# End-to-end pipeline 
 **Planned flow**
 
 1. Ingest tiles or WSI-derived chunks  
