@@ -19,10 +19,3 @@ Specific numbers, inclusion criteria, and split definitions will appear in the p
 
 For the most detailed, publication-aligned wording, see the **Data availability** (and related) sections of the manuscript once it is available.
 
-## Examples folder
-
-Illustrative images under `examples/` (when present) are for **documentation only**. They are not a dataset release. See [`examples/README.md`](../examples/README.md) and this file for constraints on what may be shown.
-
-## Contact
-
-For collaboration or data questions after the paper is public, use the contact information in the repository README or the published article.
