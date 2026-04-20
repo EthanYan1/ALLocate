@@ -15,7 +15,7 @@ Specific numbers, inclusion criteria, and split definitions will appear in the p
 ## Sharing, weights, and future releases
 
 - **Research data.** We are in discussion with our academic institutions about sharing de-identified imaging data and related materials. **Timing and scope** of any public release are expected to align with **publication and institutional approvals**, subject to ethics, privacy, and data-use agreements. Until those terms are settled, **no patient-level or restricted datasets are distributed through this repository**.
-- **Model checkpoints.** Public release of trained weights (hosting, naming, licensing) is **not yet finalized** and may require **institutional and partner approval**. Any release will be documented under `weights/` and in the manuscript when available.
+- **Model checkpoints.** The paper is **in revision**; checkpoint release is **not final**. See the dedicated [**model statement**](../weights/model_statement.md) (*please wait*).
 
 For the most detailed, publication-aligned wording, see the **Data availability** (and related) sections of the manuscript once it is available.
 

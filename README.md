@@ -174,7 +174,10 @@ Ethan to do: create a folder and move your C++ codes here for me to take a look.
 
 ## Model weights & data release
 
-Summary: checkpoints and research data releases are **not yet finalized** and depend on **institutional and partner approval**. See the full statement in [`data/availability_statement.md`](data/availability_statement.md). For publication-aligned detail, use the manuscript **Data availability** section when the paper is available.
+- **Data:** see [`data/availability_statement.md`](data/availability_statement.md).
+- **Models / checkpoints:** see [`weights/model_statement.md`](weights/model_statement.md). The paper is **in revision**; public model release details are **not final**—**please wait** for an update here and in the manuscript.
+
+For publication-aligned wording, use the manuscript **Data availability** and methods sections when the paper is available.
 
 ---
 
@@ -213,7 +216,7 @@ This repository is licensed under **Creative Commons Attribution-NonCommercial 4
 
 **Summary (not legal advice):** you may share and adapt the material **for non-commercial purposes** if you give **attribution** and point to this license. **Commercial use** is not permitted under this license without separate permission.
 
-**Other artifacts:** model weights, datasets, or third-party dependencies may be governed by **separate** terms; see `weights/README.md` and any per-component notices.
+**Other artifacts:** model weights, datasets, or third-party dependencies may be governed by **separate** terms; see [`weights/model_statement.md`](weights/model_statement.md), [`weights/README.md`](weights/README.md), and any per-component notices.
 
 ---
 
