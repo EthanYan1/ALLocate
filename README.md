@@ -52,7 +52,6 @@ ALLocate/
 
 ## Installation
 
-> **TODO (Harry):** Add environment name, Python version, CUDA/CPU notes, and exact `pip` / `conda` commands once dependencies are pinned.
 
 ```bash
 # Placeholder — replace with real instructions
@@ -206,17 +205,9 @@ Suggested stubs:
 
 ## Citation
 
-If you use this software or models, please cite the ALLocate manuscript *(details to add upon publication)*:
+If you use this software or models, please cite the ALLocate manuscript. **A full bibliographic entry (venue, volume, pages, DOI) will be added here after publication.**
 
-```bibtex
-@article{allocate2025,
-  title   = {An AI-Powered Self-Driving Microscope for Low-Cost Acute Leukemia Detection},
-  author  = {Yan, Ethan and Sun, Shenghuan and others},
-  journal = {TBD},
-  year    = {2025},
-  note    = {TODO: update with venue, volume, pages, DOI}
-}
-```
+
 
 ---
 
